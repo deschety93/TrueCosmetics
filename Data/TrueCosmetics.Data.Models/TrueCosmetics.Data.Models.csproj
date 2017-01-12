@@ -58,6 +58,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationUser.cs" />
+    <Compile Include="ApplicationUserAddress.cs" />
+    <Compile Include="Category.cs" />
+    <Compile Include="Gender.cs" />
+    <Compile Include="GenderCategory.cs" />
+    <Compile Include="GenderCategoryPicture.cs" />
+    <Compile Include="Manufacturer.cs" />
+    <Compile Include="Order.cs" />
+    <Compile Include="OrderDetail.cs" />
+    <Compile Include="OrderStatus.cs" />
+    <Compile Include="ProductPicture.cs" />
+    <Compile Include="Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

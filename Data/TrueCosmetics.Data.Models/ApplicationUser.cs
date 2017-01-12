@@ -11,6 +11,13 @@ namespace TrueCosmetics.Data.Models
 {
     public class ApplicationUser : IdentityUser
     {
+        public ApplicationUser()
+        {
+            Addresses = new HashSet<ApplicationUserAddress>();
+        }
+
+        public virtual ICollection<ApplicationUserAddress> Addresses { get; set; }
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
