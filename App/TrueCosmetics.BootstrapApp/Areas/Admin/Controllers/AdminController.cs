@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace TrueCosmetics.BootstrapApp.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         // GET: Admin/Admin

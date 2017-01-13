@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrueCosmetics", "TrueCosmetics\TrueCosmetics.csproj", "{00D86AA7-386D-4C07-9C19-65A399213507}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{2566F071-20D1-416A-BF7C-BEC949DD6457}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrueCosmetics.Data", "Data\TrueCosmetics.Data\TrueCosmetics.Data.csproj", "{15FBE1D9-BAA3-48E4-8E26-EE1051544C72}"
@@ -12,8 +10,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrueCosmetics.Data.Models", "Data\TrueCosmetics.Data.Models\TrueCosmetics.Data.Models.csproj", "{C5F21457-DF39-430A-881A-D47C73749605}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "App", "App", "{2CBFFD83-B12D-40F4-9A07-AB1FB1A35916}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrueCosmetics.App", "App\TrueCosmetics.App\TrueCosmetics.App.csproj", "{18C80633-64AF-4E41-9C51-FB7DC670E62A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrueCosmetics.Data.Common", "Data\TrueCosmetics.Data.Common\TrueCosmetics.Data.Common.csproj", "{9B74795A-327C-42B4-BADB-AA1CC1894EFF}"
 EndProject
@@ -25,10 +21,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{00D86AA7-386D-4C07-9C19-65A399213507}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{00D86AA7-386D-4C07-9C19-65A399213507}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{00D86AA7-386D-4C07-9C19-65A399213507}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{00D86AA7-386D-4C07-9C19-65A399213507}.Release|Any CPU.Build.0 = Release|Any CPU
 		{15FBE1D9-BAA3-48E4-8E26-EE1051544C72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{15FBE1D9-BAA3-48E4-8E26-EE1051544C72}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{15FBE1D9-BAA3-48E4-8E26-EE1051544C72}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -37,10 +29,6 @@ Global
 		{C5F21457-DF39-430A-881A-D47C73749605}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C5F21457-DF39-430A-881A-D47C73749605}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C5F21457-DF39-430A-881A-D47C73749605}.Release|Any CPU.Build.0 = Release|Any CPU
-		{18C80633-64AF-4E41-9C51-FB7DC670E62A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{18C80633-64AF-4E41-9C51-FB7DC670E62A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{18C80633-64AF-4E41-9C51-FB7DC670E62A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{18C80633-64AF-4E41-9C51-FB7DC670E62A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9B74795A-327C-42B4-BADB-AA1CC1894EFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9B74795A-327C-42B4-BADB-AA1CC1894EFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9B74795A-327C-42B4-BADB-AA1CC1894EFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -56,7 +44,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{15FBE1D9-BAA3-48E4-8E26-EE1051544C72} = {2566F071-20D1-416A-BF7C-BEC949DD6457}
 		{C5F21457-DF39-430A-881A-D47C73749605} = {2566F071-20D1-416A-BF7C-BEC949DD6457}
-		{18C80633-64AF-4E41-9C51-FB7DC670E62A} = {2CBFFD83-B12D-40F4-9A07-AB1FB1A35916}
 		{9B74795A-327C-42B4-BADB-AA1CC1894EFF} = {2566F071-20D1-416A-BF7C-BEC949DD6457}
 		{7F88E760-CFA0-4D95-ACD2-3CB76C9E4AE2} = {2CBFFD83-B12D-40F4-9A07-AB1FB1A35916}
 	EndGlobalSection
