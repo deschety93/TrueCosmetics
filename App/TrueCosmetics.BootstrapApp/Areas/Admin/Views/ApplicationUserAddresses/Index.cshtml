@@ -1,0 +1,37 @@
+﻿@model IEnumerable<TrueCosmetics.Data.Models.ApplicationUserAddress>
+@using GridMvc.Html
+@{
+    ViewBag.Title = "Адреси";
+    Layout = null;
+    string userId = ViewBag.userId != null ? ViewBag.userId.ToString() : "";
+    int selectedId = 0;
+    if (ViewBag.selectedId != null)
+    {
+        int.TryParse(ViewBag.selectedId.ToString(), out selectedId);
+    }
+}
+<script src="@Url.Content("~/Scripts/gridmvc.min.js")" type="text/javascript"></script>
+<p>
+    @Html.ActionLink("Създай нов", "Create", "ApplicationUserAddresses", new { userId = userId, returnUrl = ViewBag.returnUrl }, null)
+</p>
+
+@Html.Grid(Model).Columns(columns =>
+{
+    columns.Add(c => c.Id, true);
+    columns.Add(c => c.Country).Titled("Страна").Sortable(true).Filterable(true);
+    columns.Add(c => c.City).Titled("Град").Sortable(true).Filterable(true);
+    columns.Add(c => c.Address).Titled("Адрес").Sortable(true).Filterable(true);
+    columns.Add(c => c.Comment).Titled("Коментар").Sortable(true).Filterable(true);
+    columns.Add().Titled("Опции").Sanitized(false).Encoded(false).RenderValueAs(x =>
+        Html.ActionLink("Редактирай", "Edit", new { id = x.Id, returnUrl = ViewBag.returnUrl }, new { @class = "btn btn-primary" }) + " | " +
+        Html.ActionLink("Детайли", "Details", new { id = x.Id, returnUrl = ViewBag.returnUrl }, new { @class = "btn btn-primary" }) + " | " +
+        Html.ActionLink("Изтрий", "Delete", new { id = x.Id, returnUrl = ViewBag.returnUrl }, new { @class = "btn btn-primary" })
+    );
+}).WithPaging(20).SetRowCssClasses(x => x.Id == selectedId ? "grid-row-selected" : "").Named("userAddresses").Selectable(true)
+<script>
+    $(function () {
+        pageGrids.userAddresses.onRowSelect(function (e) {
+            $('#AddressId').val(e.row.Id);
+        });
+    });
+</script>

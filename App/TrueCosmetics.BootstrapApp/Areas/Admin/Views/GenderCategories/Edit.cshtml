@@ -1,0 +1,42 @@
+﻿@model GenderCategoryWithPicModel
+
+@{
+    ViewBag.Title = "Редакция";
+}
+
+<h2>Редакция</h2>
+
+@using (Html.BeginForm("Edit", "GenderCategories", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>@Model.CategoryName за @Model.GenderName</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.CategoryId)
+        @Html.HiddenFor(model => model.GenderId)
+        <div class="form-group">
+            <div class="col-md-10">
+                @Html.Label("Снимка")
+                @if (!string.IsNullOrEmpty(Model.PicPath))
+                {
+                    @Html.Image(Url.Content(Model.PicPath), new { @class = "img-rounded", height = 150 })
+                }
+                else
+                {
+                    <span>Няма картинка</span>
+                }
+                <input type="file" name="PostedFile" id="photo" value="Смени картинка" class = "btn btn-default" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+<div>
+    @Html.ActionLink("Назад към таблицата", "Index",null, new { @class = "btn btn-default" })
+</div>

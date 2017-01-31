@@ -1,0 +1,30 @@
+﻿@using GridMvc.Html
+@model IEnumerable<ApplicationUserWithRolesModel>
+
+@{
+    ViewBag.Title = "Потребители на системата";
+}
+
+<h2>Потребители на системата</h2>
+
+<p>
+    @Html.ActionLink("Създай нов", "Create")
+</p>
+
+@Html.Grid(Model).Columns(columns =>
+{
+    columns.Add(c => c.Email).Titled("Е-мейл").Filterable(true).Sortable(true);
+    columns.Add(c => c.Password).Titled("Парола").Encoded(false).Sanitized(false).RenderValueAs(
+        x => Html.Password("Password", x.Password, new { Readonly = "readonly"})
+    );
+    columns.Add(c => c.PhoneNumber).Titled("Телефон");
+    columns.Add(c => c.Roles).Titled("Роли").Sanitized(false).Encoded(false).RenderValueAs(
+        x => Html.DropDownList("DropDown", x.Roles, new { Readonly = "readonly" })
+    );
+    columns.Add().Titled("Опции").Encoded(false).Sanitized(false).RenderValueAs(c =>
+        @Html.ActionLink("Редактирай", "Edit", new { id = c.Id }, new { @class = "btn btn-default" }) + " | " +
+        @Html.ActionLink("Детайли", "Details", new { id = c.Id }, new { @class = "btn btn-default" }) + " | " +
+        @Html.ActionLink("Изтрий", "Delete", new { id = c.Id }, new { @class = "btn btn-default" })
+    );
+}).Sortable(true).Filterable(true).WithPaging(20).Selectable(false)
+

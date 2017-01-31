@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TrueCosmetics.Data.Models
 {
@@ -18,6 +19,9 @@ namespace TrueCosmetics.Data.Models
 
         [Required]
         public string Name { get; set; }
+
+        [ForeignKey("Manufacturer")]
+        public int ManufacturerId { get; set; }
 
         public string Description { get; set; }
 

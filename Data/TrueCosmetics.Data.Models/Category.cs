@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TrueCosmetics.Data.Models
 {
@@ -13,7 +14,7 @@ namespace TrueCosmetics.Data.Models
 
         [Key]
         public int Id { get; set; }
-
+        
         [Required]
         public string Name { get; set; }
 

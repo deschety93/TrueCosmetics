@@ -1,0 +1,26 @@
+﻿@model TrueCosmetics.Data.Models.Category
+
+@{
+    ViewBag.Title = "Детайли";
+}
+
+<h2>Детайли за</h2>
+
+<div>
+    <h4>@Model.Name</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Редакция", "Edit", new { id = Model.Id }, new { @class = "btn btn-default" }) |
+    @Html.ActionLink("Назад към таблицата", "Index",null, new { @class = "btn btn-default" })
+</p>

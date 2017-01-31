@@ -1,0 +1,24 @@
+﻿@model GenderCategoryWithPicModel
+
+@{
+    ViewBag.Title = "Изтриване";
+}
+
+<h2>Изтриване</h2>
+
+<h3>Сигурни ли сте, че искате да изтриенте @Model.CategoryName за @Model.GenderName</h3>
+<div>
+    <h4>Категория по пол</h4>
+    <hr />
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.CategoryId);
+        @Html.HiddenFor(model => model.GenderId);
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Назад към таблицата", "Index",null, new { @class = "btn btn-default" })
+        </div>
+    }
+</div>

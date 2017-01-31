@@ -1,0 +1,32 @@
+﻿@model IEnumerable<OrderWithAddressModel>
+@using GridMvc.Html
+@{
+    ViewBag.Title = "Поръчки";
+}
+
+<h2>Поръчки</h2>
+
+<p>
+    @Html.ActionLink("Създай нова", "Create")
+</p>
+
+@Html.Grid(Model).Columns(columns =>
+{
+    columns.Add(m => m.OrderDate).Titled("Дата на поръчка").Sortable(true).Filterable(true)
+        .Sanitized(false).Encoded(false).RenderValueAs(x => x.OrderDate != null ? x.OrderDate.ToString() : "Няма");
+    columns.Add(m => m.UserEmail).Titled("Клиент").Sortable(true).Filterable(true);
+    columns.Add(m => m.Status).Titled("Статус").Sortable(true).Filterable(true);
+    columns.Add(m => m.EstimatedDeliveryDate).Titled("Дата за доставка").Sortable(true).Filterable(true)
+        .Sanitized(false).Encoded(false).RenderValueAs(x => x.EstimatedDeliveryDate != null ? x.EstimatedDeliveryDate.ToString() : "Няма");
+    columns.Add(m => m.DateChanged).Titled("Дата за промяна").Sortable(true).Filterable(true)
+        .Sanitized(false).Encoded(false).RenderValueAs(x => x.DateChanged != null ? x.DateChanged.ToString() : "Няма");
+    columns.Add(m => m.Country).Titled("Страна").Sortable(true).Filterable(true);
+    columns.Add(m => m.City).Titled("Град").Sortable(true).Filterable(true);
+    columns.Add(m => m.Address).Titled("Адрес").Sortable(true).Filterable(true);
+    columns.Add(m => m.Comment).Titled("Коментар").Sortable(true).Filterable(true);
+    columns.Add().Titled("Опции").Sanitized(false).Encoded(false).RenderValueAs(x =>
+        Html.ActionLink("Редактирай", "Edit", new { id = x.OrderId }, new { @class = "btn btn-primary" }) + " | " +
+        Html.ActionLink("Детайли", "Index", "OrderDetails", new { id = x.OrderId }, new { @class = "btn btn-primary" }) + " | " +
+        Html.ActionLink("Изтрий", "Delete", new { id = x.OrderId }, new { @class = "btn btn-primary" })
+    );
+}).WithPaging(20).Selectable(false)

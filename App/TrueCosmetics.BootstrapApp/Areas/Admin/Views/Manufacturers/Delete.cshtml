@@ -1,0 +1,22 @@
+﻿@model ManufacturerWithPicModel
+
+@{
+    ViewBag.Title = "Изтриване";
+}
+
+<h2>Изтриване</h2>
+
+<h3>Сигурен ли сте, че искате да изтриете @Model.Name?</h3>
+<div>
+    <h4>Производител</h4>
+    <hr />
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.Id);
+        <div class="form-actions no-color">
+            <input type="submit" value="Изтрий" class="btn btn-default" /> |
+            @Html.ActionLink("Назад към таблицата", "Index",null, new { @class = "btn btn-default" })
+        </div>
+    }
+</div>

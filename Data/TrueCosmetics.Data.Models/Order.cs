@@ -15,10 +15,12 @@ namespace TrueCosmetics.Data.Models
         [Key]
         public int Id { get; set; }
 
+        [ForeignKey("UserAddress")]
+        public int UserAddressId { get; set; }
+
         [Required]
         public virtual ApplicationUserAddress UserAddress { get; set; }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime? OrderDate { get; set; }
 
         [Required]

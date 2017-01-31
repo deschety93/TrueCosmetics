@@ -1,0 +1,25 @@
+﻿@model IEnumerable<OrderWithProductModel>
+@using GridMvc.Html
+@{
+    ViewBag.Title = "Детайли за поръчка";
+}
+
+<h2>Детайли за поръчка</h2>
+
+<p>
+    @Html.ActionLink("Създай нов", "Create", new { id = ViewBag.Id })
+</p>
+
+@Html.Grid(Model).Columns(columns =>
+{
+    columns.Add(m => m.ProductName).Titled("Продукт").Sortable(true).Filterable(true);
+    columns.Add(m => m.Quantity).Titled("Количество").Sortable(true).Filterable(true);
+    columns.Add().Titled("Опции").Sanitized(false).Encoded(false).RenderValueAs(x =>
+        Html.ActionLink("Редактирай", "Edit", new { orderId = x.OrderId, productId = x.ProductId }, new { @class = "btn btn-default" }) + " | " +
+        Html.ActionLink("Изтрий", "Delete", new { orderId = x.OrderId, productId = x.ProductId }, new { @class = "btn btn-default" })
+    );
+}).WithPaging(20).Selectable(false)
+
+<div>
+    @Html.ActionLink("Назад към таблицата", "Index", "Orders", null, new { @class = "btn btn-default" })
+</div>

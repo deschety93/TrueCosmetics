@@ -18,7 +18,7 @@ namespace TrueCosmetics.BootstrapApp
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
                 namespaces: new[] { "TrueCosmetics.BootstrapApp.Areas.User.Controllers" }
-            ).DataTokens.Add("area", "User"); ;
+            ).DataTokens.Add("area", "Admin"); ;
         }
     }
 }

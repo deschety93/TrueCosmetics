@@ -17,7 +17,6 @@ namespace TrueCosmetics.Data.Models
 
         public Status Status { get; set; }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime? DateChanged { get; set; }
 
         public DateTime? DeliveryDate { get; set; }

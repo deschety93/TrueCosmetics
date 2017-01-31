@@ -1,0 +1,30 @@
+﻿@using GridMvc.Html
+@model ApplicationUserWithRolesModel
+@{
+    ViewBag.Title = "Детайли";
+}
+
+<h2>Детайли за @Model.Email</h2>
+
+<dl class="dl-horizontal">
+    <dt>
+        @Html.Label("RoleIds", "Роли")
+    </dt>
+
+    <dd>
+        @Html.DropDownListFor(model => model.RoleIds, Model.Roles, new { Readonly = "readonly" });
+    </dd>
+
+    <dt>
+        @Html.Label("Адреси")
+    </dt>
+
+    <dd>
+        @{ Html.RenderAction("Index", "ApplicationUserAddresses", new { userId = Model.Id });}
+    </dd>
+</dl>
+
+<p>
+    @Html.ActionLink("Редакция", "Edit", new { id = Model.Id }, new { @class = "btn btn-default" }) |
+    @Html.ActionLink("Назад към таблицата", "Index",null, new { @class = "btn btn-default" })
+</p>

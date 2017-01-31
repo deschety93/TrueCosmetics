@@ -1,0 +1,29 @@
+﻿@model IEnumerable<ManufacturerWithPicModel>
+@using GridMvc.Html
+@{
+    ViewBag.Title = "Производители";
+}
+
+<h2>Производители</h2>
+
+<p>
+    @Html.ActionLink("Създай нов", "Create")
+</p>
+
+@Html.Grid(Model).Columns(columns =>
+{
+    columns.Add(c => c.Name).Titled("Име").Sortable(true).Filterable(true);
+    columns.Add(c => c.Description).Titled("Описание").Sortable(true).Filterable(true);
+    columns.Add().Titled("Лого").Sanitized(false).Encoded(false).RenderValueAs(x =>
+        !string.IsNullOrEmpty(x.PicPath) ? Html.Image(Url.Content(x.PicPath), new { @class = "img-rounded", height = 100 }).ToHtmlString() : "<span>Няма снимка</span>"
+    );
+    columns.Add().Titled("Опции").Sanitized(false).Encoded(false).RenderValueAs(x =>
+        Html.ActionLink("Редактирай", "Edit", new { id = x.Id }, new { @class = "btn btn-default" }) + " | " +
+        Html.ActionLink("Детайли", "Details", new { id = x.Id }, new { @class = "btn btn-default" }) + " | " +
+        Html.ActionLink("Изтрий", "Delete", new { id = x.Id }, new { @class = "btn btn-default" })
+    );
+}).WithPaging(20)
+@if (ViewBag.categoryId != null)
+{
+    @Html.ActionLink("Назад към таблицата", "Index", "Manufacturers", null, new { @class = "btn btn-default" })
+}

@@ -1,0 +1,21 @@
+﻿@model IEnumerable<TrueCosmetics.Data.Models.Category>
+@using GridMvc.Html
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Категории продукти</h2>
+
+<p>
+    @Html.ActionLink("Създай нова", "Create")
+</p>
+
+@Html.Grid(Model).Columns(columns =>
+{
+    columns.Add(c => c.Name).Titled("Категория").Sortable(true).Filterable(true);
+    columns.Add().Titled("Опции").Sanitized(false).Encoded(false).RenderValueAs(x =>
+    Html.ActionLink("Редактирай", "Edit", new { Id = x.Id }, new { @class = "btn btn-default" }) + " | " +
+    Html.ActionLink("Детайли", "Index", "GenderCategories", new { categoryId = x.Id }, new { @class = "btn btn-default" }) + " | " +
+    Html.ActionLink("Изтрий", "Delete", new { Id = x.Id }, new { @class = "btn btn-default" })
+);
+}).WithPaging(20)

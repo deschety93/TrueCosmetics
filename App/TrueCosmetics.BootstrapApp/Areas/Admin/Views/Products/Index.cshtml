@@ -1,0 +1,67 @@
+﻿@model IEnumerable<ProductWithPicModel>
+@using GridMvc.Html
+
+@{
+    ViewBag.Title = "Продукти";
+}
+
+<h2>Продукти</h2>
+
+<p>
+    @Html.ActionLink("Създай нов", "Create")
+</p>
+
+@Html.Grid(Model).Columns(columns =>
+{
+    columns.Add(c => c.Name).Titled("Име").Sortable(true).Filterable(true);
+    columns.Add(c => c.Description).Titled("Описание").Sortable(true).Filterable(true);
+    columns.Add(c => c.ManufacturerName).Titled("Производител").Sortable(true).Filterable(true);
+    columns.Add().Titled("Картинки").Sanitized(false).Encoded(false).RenderValueAs(x =>
+        Ajax.ActionLink("Виж картинки", "Pictures", new { Id = x.Id }, new AjaxOptions()
+        {
+            HttpMethod = "GET",
+            InsertionMode = InsertionMode.Replace,
+            UpdateTargetId = "PicGalery",
+            OnSuccess = @"ShowModal"
+        }).ToHtmlString()
+    );
+    columns.Add().Titled("Категории").Sanitized(false).Encoded(false).RenderValueAs(x =>
+        Html.ListBoxFor(y => x.GenderCategoriesIds, x.GenderCategoriesNames, new { Disabled="disabled"})
+    );
+    columns.Add().Titled("Опции").Sanitized(false).Encoded(false).RenderValueAs(x =>
+        Html.ActionLink("Редактирай", "Edit", new { id = x.Id }, new { @class = "btn btn-default" }) + " | " +
+        Html.ActionLink("Детайли", "Details", new { id = x.Id }, new { @class = "btn btn-default" }) + " | " +
+        Html.ActionLink("Изтрий", "Delete", new { id = x.Id }, new { @class = "btn btn-default" })
+    );
+}).WithPaging(20).Selectable(false)
+@if (ViewBag.categoryId != null)
+{
+    @Html.ActionLink("Назад към таблицата", "Index", "Manufacturers", null, new { @class = "btn btn-default" })
+}
+<div class="modal fade" id="modal-container-353919" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" >
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    ×
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    Снимки
+                </h4>
+            </div>
+            <div class="modal-body container-fluid" id="PicGalery">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function ShowModal()
+    {
+        $('#modal-container-353919').modal('show');
+    }
+</script>

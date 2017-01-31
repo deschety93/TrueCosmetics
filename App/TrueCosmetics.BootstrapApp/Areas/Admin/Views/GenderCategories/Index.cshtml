@@ -1,0 +1,31 @@
+﻿@using GridMvc.Html
+@model IEnumerable<GenderCategoryWithPicModel>
+
+@{
+    ViewBag.Title = "Категории по пол";
+}
+
+<h2>Категории по пол</h2>
+
+<p>
+    @Html.ActionLink("Създай нова", "Create")
+</p>
+
+@Html.Grid(Model).Columns(columns =>
+{
+    columns.Add(c => c.CategoryName).Titled("Категория").Sortable(true).Filterable(true);
+    columns.Add(c => c.GenderName).Titled("Пол").Sortable(true).Filterable(true);
+    columns.Add().Titled("Снимка").Sanitized(false).Encoded(false).RenderValueAs(x =>
+        !string.IsNullOrEmpty(x.PicPath) ? Html.Image(Url.Content(x.PicPath), new { @class = "img-rounded", height = 150 }).ToHtmlString() : "<span>Няма снимка</span>"
+    );
+    columns.Add().Titled("Опции").Sanitized(false).Encoded(false).RenderValueAs(x =>
+        Html.ActionLink("Редактирай", "Edit", new { CategoryId = x.CategoryId, GenderId = x.GenderId }, new { @class = "btn btn-default" }) + " | " +
+        Html.ActionLink("Детайли", "Details", new { CategoryId = x.CategoryId, GenderId = x.GenderId }, new { @class = "btn btn-default" })  + " | " +
+        Html.ActionLink("Изтрий", "Delete", new { CategoryId = x.CategoryId, GenderId = x.GenderId }, new { @class = "btn btn-default" })
+    );
+}).WithPaging(20)
+@if (ViewBag.categoryId != null)
+{
+    @Html.ActionLink("Назад към таблицата", "Index", "Categories",null, new { @class = "btn btn-default" })
+}
+<section></section>

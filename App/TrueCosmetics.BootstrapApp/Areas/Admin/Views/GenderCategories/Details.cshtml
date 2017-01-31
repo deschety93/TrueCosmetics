@@ -1,0 +1,46 @@
+﻿@using TrueCosmetics.BootstrapApp
+@model GenderCategoryWithPicModel
+
+@{
+    ViewBag.Title = "Детайли";
+}
+
+<h2>Детайли</h2>
+
+<div>
+    <h4>Категория по пол</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CategoryName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CategoryName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GenderName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GenderName)
+        </dd>
+
+        @if (!string.IsNullOrEmpty(Model.PicPath))
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.PicPath)
+            </dt>
+
+            <dd>
+                @Html.Image(Url.Content(Model.PicPath), new { @class = "img-rounded", height = 150 })
+            </dd>
+        }
+
+    </dl>
+</div>
+<p>
+    @*@Html.ActionLink("Edit", "Edit", new { CategoryId = Model.CategoryId, GenderId = Model.GenderId }) |*@
+    @Html.ActionLink("Назад към таблицата", "Index",null, new { @class = "btn btn-default" })
+</p>
