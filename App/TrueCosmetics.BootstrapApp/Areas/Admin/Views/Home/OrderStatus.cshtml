@@ -1,0 +1,41 @@
+﻿@model IDictionary<TrueCosmetics.Data.Models.Status, int>
+@{
+    ViewBag.Title = "Blank";
+    Layout = null;
+    string[] statusNames = new string[]
+    {
+        "Създавани поръчки", "Изчакващи поръчки", "Приети поръчки", "Отказани поръчки", "Доставени поръчки"
+    };
+    string[] panelClasses = new string[]
+    {
+        "panel panel-info", "panel panel-primary", "panel panel-green", "panel panel-red", "panel panel-yellow"
+    };
+}
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="@string.Format("col-lg-{0} col-md-6{1}", 12 / Model.Count, item.Key == Model.First().Key ? " col-lg-offset-" + (12 % Model.Count) / 2 : "")" >
+            <div class="@panelClasses[(int)item.Key]">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-2">
+                            <i class="fa fa-shopping-cart fa-3x"></i>
+                        </div>
+                        <div class="col-xs-10 text-right">
+                            <div class="huge">@item.Value</div>
+                            <div>@statusNames[(int)item.Key]</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="@Url.Action("Index", "Orders", new { status = item.Key })">
+                    <div class="panel-footer">
+                        <span class="pull-left">Подробности</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    }
+</div>

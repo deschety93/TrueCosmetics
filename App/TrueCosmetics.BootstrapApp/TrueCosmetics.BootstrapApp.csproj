@@ -314,6 +314,7 @@
   <ItemGroup>
     <Compile Include="App_Data\ApplicationDbContext.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Data\DbContextExtensions.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\MvcRazorExtensions.cs" />
@@ -335,6 +336,7 @@
     <Compile Include="Areas\Admin\Controllers\ProductsController.cs" />
     <Compile Include="Areas\Admin\Domain\AdminNavData.cs" />
     <Compile Include="Areas\Admin\Models\ApplicationUsers\ApplicationUserWithRolesModel.cs" />
+    <Compile Include="Areas\Admin\Models\ChangeNotification.cs" />
     <Compile Include="Areas\Admin\Models\GenderCategories\GenderCategoryWithPicModel.cs" />
     <Compile Include="Areas\Admin\Models\Manufacturers\ManufacturerWithPicModel.cs" />
     <Compile Include="Areas\Admin\Models\Navbar.cs" />
@@ -864,7 +866,7 @@
     <Content Include="Areas\User\Views\web.config" />
     <Content Include="Areas\User\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\User\Views\Shared\Error.cshtml" />
-    <Content Include="Areas\Admin\Views\Home\Blank.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\OrderStatus.cshtml" />
     <Content Include="Areas\Admin\Views\Home\Buttons.cshtml" />
     <Content Include="Areas\Admin\Views\Home\FlotCharts.cshtml" />
     <Content Include="Areas\Admin\Views\Home\Forms.cshtml" />

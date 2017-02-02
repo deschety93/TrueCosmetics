@@ -9,7 +9,9 @@ using TrueCosmetics.Data;
 using Microsoft.AspNet.Identity.Owin;
 using System.Threading.Tasks;
 using TrueCosmetics.Data.Common.Repositories;
-
+using TrueCosmetics.BootstrapApp.Areas.Admin.Models;
+using System.Data.Entity.Core.Objects;
+using System.Dynamic;
 
 namespace TrueCosmetics.BootstrapApp.Areas.Admin.Controllers
 {
@@ -36,6 +38,21 @@ namespace TrueCosmetics.BootstrapApp.Areas.Admin.Controllers
         {
             try
             {
+                foreach (var entry in Context.ChangeTracker.Entries()
+                    .Where(x => x.State != EntityState.Detached && x.State != EntityState.Unchanged).Distinct())
+                {
+                    ChangeNotification.AllNotifications.AddFirst(new ChangeNotification()
+                    {
+                        Name = ObjectContext.GetObjectType(entry.Entity.GetType()).Name,
+                        State = entry.State,
+                        ChangeDate = DateTime.Now
+                    });
+
+                    if(ChangeNotification.AllNotifications.Count > 10)
+                    {
+                        ChangeNotification.AllNotifications.RemoveLast();
+                    }
+                }
                 await Set.SaveChangesAsync();
             }
             catch(Exception e)
