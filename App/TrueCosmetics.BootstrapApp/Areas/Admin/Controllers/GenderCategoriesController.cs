@@ -111,8 +111,12 @@ namespace TrueCosmetics.BootstrapApp.Areas.Admin.Controllers
             {
                 if(genderCategoryModel.PostedFile != null)
                 {
-                    GenderCategory g = await Set.All().Include(x => x.Picture).FirstOrDefaultAsync(
-                        x => x.CategoryId == genderCategoryModel.CategoryId && x.GenderId == genderCategoryModel.GenderId
+                    GenderCategory g = await Set.All()
+                        .Include(x => x.Category)
+                        .Include(x => x.Gender)
+                        .Include(x => x.Picture)
+                        .FirstOrDefaultAsync(
+                            x => x.CategoryId == genderCategoryModel.CategoryId && x.GenderId == genderCategoryModel.GenderId
                     );
                     g.Picture = SetPicture(g, genderCategoryModel.PostedFile);
                     Set.Update(g);

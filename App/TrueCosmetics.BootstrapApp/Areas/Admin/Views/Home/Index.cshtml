@@ -83,13 +83,6 @@
     $(function () {
         var chart = Morris.Area({
             element: 'morris-area-chart-orders',
-            data: [{
-                Period: '04-02-2014',
-                DeliveredCount: 0,
-                RejectedCount: 0,
-                AcceptedCount: 0,
-                PendingCount: 0,
-            }],
             xkey: 'Period',
             ykeys: ['DeliveredCount', 'RejectedCount', 'AcceptedCount', 'PendingCount'],
             labels: ['Завършени поръчки', 'Отказани поръчки', 'Приети поръчки', 'Чакащи поръчки'],

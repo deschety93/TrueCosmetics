@@ -343,16 +343,19 @@
     <Compile Include="Areas\Admin\Models\Orders\OrderWithAddressModel.cs" />
     <Compile Include="Areas\Admin\Models\Orders\OrderWithProductModel.cs" />
     <Compile Include="Areas\Admin\Models\Products\ProductWithPicModel.cs" />
+    <Compile Include="Areas\User\Attributes\AddressedAttribute.cs" />
     <Compile Include="Areas\User\Controllers\AccountController.cs" />
+    <Compile Include="Areas\User\Controllers\CartController.cs" />
+    <Compile Include="Areas\User\Controllers\GenderCategoriesController.cs" />
     <Compile Include="Areas\User\Controllers\ManageController.cs" />
+    <Compile Include="Areas\User\Controllers\ManufacturersController.cs" />
+    <Compile Include="Areas\User\Controllers\ProductsController.cs" />
+    <Compile Include="Areas\User\Models\FilterModel.cs" />
+    <Compile Include="Areas\User\Models\OrderDetailModel.cs" />
+    <Compile Include="Areas\User\Models\ProductFilterModel.cs" />
     <Compile Include="Areas\User\UserAreaRegistration.cs" />
-    <Compile Include="Areas\User\Controllers\AboutController.cs" />
-    <Compile Include="Areas\User\Controllers\BlogController.cs" />
-    <Compile Include="Areas\User\Controllers\ContactController.cs" />
     <Compile Include="Areas\User\Controllers\HomeController.cs" />
-    <Compile Include="Areas\User\Controllers\OtherController.cs" />
-    <Compile Include="Areas\User\Controllers\PortfolioController.cs" />
-    <Compile Include="Areas\User\Controllers\ServicesController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -803,8 +806,16 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Gridmvc.css" />
+    <Content Include="Content\images\baneri\Gatineau-873x460.jpg" />
+    <Content Include="Content\images\baneri\Kerastase-873x460.jpg" />
+    <Content Include="Content\images\baneri\loreal-professionel-873x460.jpg" />
+    <Content Include="Content\images\GenderCategories\1.jpg" />
+    <Content Include="Content\images\GenderCategories\240701_558124.jpg" />
+    <Content Include="Content\images\GenderCategories\magic-378x178.jpg" />
+    <Content Include="Content\images\loading.gif" />
     <Content Include="Content\images\Manufacturers\madona-snimka.jpg" />
     <Content Include="Content\sb-admin-2.css" />
+    <Content Include="Content\site.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -1257,6 +1268,21 @@
     <Content Include="Areas\Admin\Views\Orders\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Orders\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Products\Pictures.cshtml" />
+    <Content Include="Areas\User\Views\GenderCategories\Create.cshtml" />
+    <Content Include="Areas\User\Views\GenderCategories\Delete.cshtml" />
+    <Content Include="Areas\User\Views\GenderCategories\Details.cshtml" />
+    <Content Include="Areas\User\Views\GenderCategories\Edit.cshtml" />
+    <Content Include="Areas\User\Views\GenderCategories\Index.cshtml" />
+    <Content Include="Areas\User\Views\GenderCategories\Navigation.cshtml" />
+    <Content Include="Areas\User\Views\Products\Index.cshtml" />
+    <Content Include="Areas\User\Views\Cart\Delete.cshtml" />
+    <Content Include="Areas\User\Views\Cart\Edit.cshtml" />
+    <Content Include="Areas\User\Views\Cart\Add.cshtml" />
+    <Content Include="Areas\User\Views\Manage\Addresses.cshtml" />
+    <Content Include="Areas\User\Views\Manage\_AddressesPartial.cshtml" />
+    <Content Include="Areas\User\Views\Cart\Cart.cshtml" />
+    <Content Include="Areas\User\Views\Manufacturers\Navigation.cshtml" />
+    <Content Include="Areas\User\Views\Products\_ProductFilters.cshtml" />
     <None Include="Scripts\jquery-3.1.1-vsdoc.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -1295,7 +1321,6 @@
     <Content Include="Areas\User\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_GridPager.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Grid.cshtml" />
-    <Content Include="Views\web.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
@@ -1306,24 +1331,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\User\Views\Home\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\User\Views\About\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\User\Views\Services\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\User\Views\Contact\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\User\Views\Portfolio\ThreeColumn.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\User\Views\Portfolio\SingleItem.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\User\Views\Other\SideBar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -1345,9 +1352,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Content\images\GenderCategories\" />
     <Folder Include="Content\images\Products\" />
-    <Folder Include="Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\..\packages\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />

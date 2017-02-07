@@ -1,4 +1,4 @@
-﻿@model TrueCosmetics.Data.Models.Product
+﻿@model ProductWithPicModel
 
 @{
     ViewBag.Title = "Details";
@@ -35,11 +35,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.QuanityInStore)
+            @Html.DisplayNameFor(model => model.QuantityInStore)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.QuanityInStore)
+            @Html.DisplayFor(model => model.QuantityInStore)
         </dd>
 
     </dl>

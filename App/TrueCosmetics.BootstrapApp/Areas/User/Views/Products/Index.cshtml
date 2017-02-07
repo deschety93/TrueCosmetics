@@ -1,0 +1,90 @@
+﻿@model IEnumerable<TrueCosmetics.Data.Models.Product>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@section Header {
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            Производители
+        </h3>
+    </div>
+    <div class="panel-body">
+        <div class="container-fluid">
+            <div class="row">
+                @foreach (var item in (IEnumerable<TrueCosmetics.Data.Models.Manufacturer>)ViewBag.Manufacturers)
+                {
+                    <div class="col-md-3">
+                        <div class="thumbnail">
+                            <a href="@Url.Action("Index", "Products", new { manufacturerId = item.Id })">
+                                <img alt="@item.Name" src="@(string.IsNullOrEmpty(item.LogoPicPath) ? "#" : Url.Content(item.LogoPicPath))" />
+                            </a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+}
+
+<div class="container-fluid">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-3">
+                <div class="thumbnail">
+                    <img alt="@item.Name" src="@(item.Pictures.Count == 0 ? "#" : Url.Content(item.Pictures.First().Path))" />
+                    <div class="caption">
+                        <h3>
+                            @item.Name
+                        </h3>
+                        <p>
+                            @item.Description
+                        </p>
+                        <p>
+                            @item.Price лева
+                        </p>
+                        @Ajax.ActionLink("Добави", "Add", "Cart", new { productId = item.Id }, new AjaxOptions()
+                        {
+                            HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "modal-container-5555-dialog",
+                            OnSuccess = "onSuccess",
+                            OnFailure = "onFail"
+                        }, new { @class="btn btn-primary"})
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<div class="modal fade" id="modal-container-5555" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" id="modal-container-5555-dialog">
+    </div>
+</div>
+<script>
+    function onFail(error){
+        console.log(error);
+    }
+    function onSuccess() {
+        $('#modal-container-5555').modal('show')
+    }
+    function closeModal() {
+        $('#modal-container-5555').modal('hide')
+    }
+</script>
+
+@section Filters{
+    @{
+        ViewDataDictionary d = new ViewDataDictionary(new ProductFilterModel()
+        {
+            PriceFrom = (decimal)ViewData["minPrice"], PriceTo = (decimal)ViewData["maxPrice"]
+        });
+        foreach (var item in ViewData.Keys)
+        {
+            d.Add(item, ViewData[item]);
+        }
+        Html.RenderPartial("/Areas/User/Views/Products/_ProductFilters.cshtml", d);
+    }
+}

@@ -1,0 +1,44 @@
+﻿@model ProductFilterModel
+
+@{
+    Layout = null;
+    List<SelectListItem> catFilter = (List<SelectListItem>)(ViewData["catFilter"]);
+    List<SelectListItem> manFilter = (List<SelectListItem>)(ViewData["manFilter"]);
+    decimal minPrice = (decimal)(ViewData["minPrice"]);
+    decimal maxPrice = (decimal)(ViewData["maxPrice"]);
+}
+
+@using (Html.BeginForm("Index", "Products", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.Label("Производители", new { @class = "control-label col-md-12" })
+            <div class="col-md-12">
+                @Html.ListBoxFor(model => model.ManufacturerIds, manFilter, new { @class = "form-control list-group", multiple="miltiple"})
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Категории", new { @class = "control-label col-md-12" })
+            <div class="col-md-12">
+                @Html.ListBoxFor(model => model.CategoryIds, catFilter, new { @class = "form-control list-group", multiple = "miltiple" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label(String.Format("Цена от {0} до {1}", minPrice, maxPrice), new { @class = "control-label col-md-12" })
+            <div class="col-md-5">
+                @Html.EditorFor(model => model.PriceFrom, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            <div class="col-md-2">до</div>
+            <div class="col-md-5">
+                @Html.EditorFor(model => model.PriceTo, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-12">
+                <input type="submit" value="Запази" class="btn btn-info" />
+            </div>
+        </div>
+    </div>
+}

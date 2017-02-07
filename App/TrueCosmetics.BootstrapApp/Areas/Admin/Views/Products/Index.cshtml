@@ -16,6 +16,8 @@
     columns.Add(c => c.Name).Titled("Име").Sortable(true).Filterable(true);
     columns.Add(c => c.Description).Titled("Описание").Sortable(true).Filterable(true);
     columns.Add(c => c.ManufacturerName).Titled("Производител").Sortable(true).Filterable(true);
+    columns.Add(c => c.Price).Titled("Цена").Sortable(true).Filterable(true);
+    columns.Add(c => c.QuantityInStore).Titled("Наличност").Sortable(true).Filterable(true);
     columns.Add().Titled("Картинки").Sanitized(false).Encoded(false).RenderValueAs(x =>
         Ajax.ActionLink("Виж картинки", "Pictures", new { Id = x.Id }, new AjaxOptions()
         {
@@ -30,7 +32,7 @@
     );
     columns.Add().Titled("Опции").Sanitized(false).Encoded(false).RenderValueAs(x =>
         Html.ActionLink("Редактирай", "Edit", new { id = x.Id }, new { @class = "btn btn-default" }) + " | " +
-        Html.ActionLink("Детайли", "Details", new { id = x.Id }, new { @class = "btn btn-default" }) + " | " +
+        Html.ActionLink("Детайли", "Index", "Orders", new { productId = x.Id }, new { @class = "btn btn-default" }) + " | " +
         Html.ActionLink("Изтрий", "Delete", new { id = x.Id }, new { @class = "btn btn-default" })
     );
 }).WithPaging(20).Selectable(false)

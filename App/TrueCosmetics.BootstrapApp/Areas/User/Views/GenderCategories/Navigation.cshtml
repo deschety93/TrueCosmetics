@@ -1,0 +1,22 @@
+﻿@model IEnumerable<TrueCosmetics.Data.Models.Category>
+@{
+    Layout = null;
+}
+@foreach (var item in Model)
+{
+    <li class="col-sm-3">
+        <ul>
+            <li class="dropdown-header">
+                @item.Name
+            </li>
+            @foreach (var child in item.GenderCategory)
+            {
+            <li>
+                @Html.ActionLink(child.Category.Name + " за " + child.Gender.Name, "Index", "Products",
+                new { genderId = child.GenderId, categoryId = child.CategoryId }, null)
+            </li>
+            }
+            <li class="divider"></li>
+        </ul>
+    </li>
+}

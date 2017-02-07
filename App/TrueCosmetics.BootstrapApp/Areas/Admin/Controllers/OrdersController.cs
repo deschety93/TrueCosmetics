@@ -16,14 +16,21 @@ namespace TrueCosmetics.BootstrapApp.Areas.Admin.Controllers
     public class OrdersController : AdminController<Order, ApplicationUser, ApplicationUserAddress>
     {
         // GET: Admin/Orders
-        public async Task<ActionResult> Index(Status? status) 
+        public async Task<ActionResult> Index(Status? status, string userId, int? productId) 
         {
-            var result = await Set.All().Include(y => y.OrderStatus)
-                .Include(x => x.UserAddress.User)
-                .Where(x => status.HasValue ? x.OrderStatus.Status == status : true)
-                .ToListAsync();
+            var result = Set.All().Include(y => y.OrderStatus)
+                .Include(x => x.UserAddress.User);
+            if (status.HasValue)
+                result = result.Where(x => x.OrderStatus.Status == status);
+            if (!string.IsNullOrEmpty(userId))
+                result = result.Where(x => x.UserAddress.User.Id == userId);
+            if (productId.HasValue)
+                result = result.Include(x => x.OrderDetails)
+                               .Where(x => x.OrderDetails.Any(y => y.ProductId == productId));
+            if (!string.IsNullOrEmpty(userId))
+                return PartialView((await result.ToListAsync()).Select(OrderWithAddressModel.From));
 
-            return View(result.Select(OrderWithAddressModel.From));
+            return View((await result.ToListAsync()).Select(OrderWithAddressModel.From));
         }
 
         // GET: Admin/Orders/Details/5

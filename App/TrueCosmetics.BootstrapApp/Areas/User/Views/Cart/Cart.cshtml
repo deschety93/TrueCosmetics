@@ -1,0 +1,83 @@
+﻿@model IList<OrderDetailModel>
+@{
+    Layout = null;
+    decimal total = 0;
+}
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            ×
+        </button>
+        <h4 class="modal-title" id="myModalLabel">
+            Количка
+        </h4>
+    </div>
+    @if (Model.Count > 0)
+    {
+        using (Html.BeginForm("Checkout", "Cart", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <div class="modal-body">
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                    total += Model[i].ProductPrice * Model[i].Quantity;
+                    <div class="form-horizontal">
+                        @Html.HiddenFor(model => model[i].ProductId)
+                        @Html.HiddenFor(model => model[i].ProductPrice)
+                        <div class="form-group">
+                            @Html.LabelFor(model => model[i].ProductName, Model[i].ProductName, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model[i].Quantity,
+                                new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model[i].Quantity, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("Цена", new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.Label((Model[i].Quantity * Model[i].ProductPrice).ToString(), new { @class = "form-control" } )
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                @Ajax.ActionLink("Премахни", "Remove", "Cart",
+                                        new { productId = Model[i].ProductId },
+                                        new AjaxOptions()
+                                        {
+                                            HttpMethod = "Get",
+                                            InsertionMode = InsertionMode.Replace,
+                                            UpdateTargetId = "modal-container-5555-dialog"
+                                        }, new { @class = "btn btn-default" }
+                                    )
+                            </div>
+                        </div>
+                    </div>
+                }
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="pull-right">
+                            Общо: @total лева
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    Close
+                </button>
+                <button type="submit" class="btn btn-primary">Потвърди</button>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">
+                Close
+            </button>
+        </div>
+    }
+</div>
+
+<script>
+</script>

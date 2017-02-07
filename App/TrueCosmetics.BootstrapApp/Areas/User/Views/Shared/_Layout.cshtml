@@ -4,97 +4,157 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Modern Business - @ViewBag.Title</title>
+    <title>True Cosmetics @ViewBag.Title</title>
 
     <!-- Bootstrap -->
-    <link href="@Url.Content("/css/bootstrap.css")" rel="stylesheet">
-    <link href="@Url.Content("/css/modern-business.css")" rel="stylesheet">
+    <link href="@Url.Content("~/bower_components/font-awesome/css/font-awesome.min.css")" rel="stylesheet" type="text/css" />
+    @Styles.Render("~/Content/css")
+    <link href="@Url.Content("~/Content/themes/base/jquery-ui.min.css")" rel="stylesheet" type="text/css" />
+    @Scripts.Render("~/bundles/jquery")
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
 <body>
-
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <!-- You'll want to use a responsive image option so this logo looks good on devices - I recommend using something like retina.js (do a quick Google search for it and you'll find it) -->
-                @Html.ActionLink("True Cosmetics", "Index", new { controller = "Home" }, new { @class = "navbar-brand" })
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2">
             </div>
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="container-fluid">
+                            <div class="jumbotron" id="jumbHeader">
+                                <div class="navbar-fixed-top row">
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-8">
+                                        <ul class="pull-right">
+                                            <li class="dropdown dropdown-large">
+                                                <button id="modal-2" role="button" class="btn btn-default">
+                                                    <em class="fa fa-shopping-cart fa-2x">Количка</em>
+                                                </button>
+                                                <div class="modal fade" id="modal-container-2" role="dialog" aria-labelledby="Количка" aria-hidden="true">
+                                                    <div class="modal-dialog" id="userCart">
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-2"></div>
+                                </div>
+                                <h1>True Cosmetics</h1>
+                                <p>Мазазин за козметични стоки</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <nav class="navbar navbar-default navbar-static-top" role="navigation">
+                            <div class="navbar-header">
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li id="about">
-                       @Html.ActionLink("About", "Index", "About")
-                    </li>
-                    <li id="services">
-                        @Html.ActionLink("Services", "Index", "Services")
-                    </li>
-                    <li id="contact">
-                        @Html.ActionLink("Contact", "Index", "Contact")
-                    </li>
-                    <li id="portfolio" class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Portfolio <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            
-                            
-                            <li id="3columnportfolio">
-                                @Html.ActionLink("3 Column Portfolio", "ThreeColumn", "Portfolio")
-                            </li>
-                            
-                            <li id="singleportfolioitem">
-                                @Html.ActionLink("Single Portfolio Item", "SingleItem", "Portfolio")
-                            </li>
-                        </ul>
-                    </li>
-                    
-                    <li id="other" class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Other Pages <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            
-                            <li id="sidebarpage">
-                                @Html.ActionLink("Sidebar Page", "Sidebar", "Other")
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        @Html.Partial("_LoginPartial")
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
-    
-    @RenderBody()
+                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                                    <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+                                </button> @Html.ActionLink("Начало", "Index", "Home", null, new { @class = "navbar-brand" })
+                            </div>
 
-    <div class="container">
-
-        <hr>
-
-        <footer>
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>Copyright &copy; Company 2013</p>
+                            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                <ul class="nav navbar-nav">
+                                    <li>
+                                        @Html.ActionLink("Жени", "Index", "Products", new { gender = "Жени" }, null)
+                                    </li>
+                                    <li>
+                                        @Html.ActionLink("Мъже", "Index", "Products", new { gender = "Мъже" }, null)
+                                    </li>
+                                    <li>
+                                        @Html.ActionLink("Деца", "Index", "Products", new { gender = "Деца" }, null)
+                                    </li>
+                                    <li>
+                                        @Html.ActionLink("Всички", "Index", "Products")
+                                    </li>
+                                    <li class="dropdown dropdown-large">
+                                        @Ajax.ActionLink("Категории", "Navigation", "GenderCategories", null, new AjaxOptions()
+                                       {
+                                           HttpMethod = "GET",
+                                           InsertionMode = InsertionMode.Replace,
+                                           UpdateTargetId = "dropdown-menu-cateogries",
+                                           LoadingElementId = "ajax-loader"
+                                       }, new { @class = "dropdown-toggle", data_toggle = "dropdown" })
+                                        <ul class="dropdown-menu dropdown-menu-large row transparent" id="dropdown-menu-cateogries"></ul>
+                                    </li>
+                                    <li class="dropdown">
+                                        @Ajax.ActionLink("Производители", "Navigation", "Manufacturers", null, new AjaxOptions()
+                                       {
+                                           HttpMethod = "GET",
+                                           InsertionMode = InsertionMode.Replace,
+                                           UpdateTargetId = "dropdown-menu-manufacturers",
+                                           LoadingElementId = "ajax-loader"
+                                       }, new { @class = "dropdown-toggle", data_toggle = "dropdown" })
+                                        <ul class="dropdown-menu transparent" id="dropdown-menu-manufacturers"></ul>
+                                    </li>
+                                </ul>
+                                <ul class="nav navbar-nav navbar-right">
+                                    @Html.Partial("_LoginPartial")
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        @RenderSection("Header", false)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">
+                                    Филтри
+                                </h3>
+                            </div>
+                            <div class="panel-body">
+                                @RenderSection("Filters", false)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">
+                                    Продукти
+                                </h3>
+                            </div>
+                            <div class="panel-body">
+                                @RenderBody()
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </footer>
-
+            <div class="col-md-2">
+            </div>
+        </div>
     </div>
-    <!-- /.container -->
-
+    <img src="@Url.Content("~/Content/images/loading.gif")" id="ajax-loader" hidden>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="@Url.Content("/js/bootstrap.js")"></script>
-    <script src="@Url.Content("/js/modern-business.js")"></script>
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.12.1.min.js")"></script>
+    <script>
+        $(function () {
+            $(document).ajaxStart(function () {
+                $('#ajax-loader').show();
+            })
+            $(document).ajaxComplete(function () {
+                $('#ajax-loader').hide();
+            })
+            $("#modal-2").click(function(){
+                $("#modal-container-5555-dialog").load('@Url.Action("Cart", "Cart")');
+                $('#modal-container-5555').modal('show');
+            });
+        })
+    </script>
     @RenderSection("Scripts", false)
 </body>
 </html>

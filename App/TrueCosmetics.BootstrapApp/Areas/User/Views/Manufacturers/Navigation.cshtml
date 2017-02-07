@@ -1,0 +1,12 @@
+﻿@model IEnumerable<TrueCosmetics.Data.Models.Manufacturer>
+@{
+    Layout = null;
+}
+@foreach (var item in Model)
+{
+    <li>
+        @Html.ActionLink(item.Name, "Index", "Products",
+                new { manufacturerId = item.Id }, null)
+    </li>
+    <li class="divider"></li>
+}

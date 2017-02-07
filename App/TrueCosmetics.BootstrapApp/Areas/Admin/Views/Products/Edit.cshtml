@@ -43,27 +43,27 @@
         </div>
 
         <div class="form-group">
-            @Html.Label("Наличност", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Наличност", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.QuantityInStore, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.QuantityInStore, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
-            @Html.Label("Категория", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Категория", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.ListBoxFor(model => model.GenderCategoriesIds, gc, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ListBoxFor(model => model.GenderCategoriesIds, gc, new { @class = "form-control list-group" } )
             </div>
         </div>
 
         <div class="form-group">
-            @Html.Label("Производител", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Производител", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.ManufacturerId, manufacturers, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.ManufacturerId, manufacturers, new { @class = "form-control" })
             </div>
         </div>
         <div class="form-group">
-            @Html.Label("Снимки", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Снимки", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                  @{Html.RenderAction("Pictures", new { id = Model.Id });}
                 <input type="file" name="PostedFiles" id="photo" value="Смени картинки" class = "btn btn-default" multiple />
@@ -72,7 +72,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Запази" class="btn btn-default" />
+                <input type="submit" value="Запази" class="btn-lg btn-info" />
             </div>
         </div>
     </div>
@@ -81,3 +81,8 @@
 <div>
     @Html.ActionLink("Назад към таблицата", "Index",null, new { @class = "btn btn-default" })
 </div>
+<script>
+    $(function () {
+        $("#GenderCategoriesIds > option").addClass("list-group-item");
+    })
+</script>

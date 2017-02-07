@@ -70,7 +70,7 @@ namespace TrueCosmetics.BootstrapApp.Areas.Admin.Controllers
                 .Include(x => x.OrderDetails.Select(y => y.Product))
                 .Include(x => x.UserAddress)
                 .ToListAsync())
-                .Select(x => new { City = x.UserAddress.City, Amount = x.OrderDetails.Sum(y => y.Product.Price) })
+                .Select(x => new { City = x.UserAddress.City, Amount = x.OrderDetails.Sum(y => y.Quantity * y.Product.Price) })
                 .GroupBy(x => x.City)
                 .ToDictionary(x => x.Key, y => y.Sum(z => z.Amount))
                 .Select(x => new { label = x.Key, value = x.Value});

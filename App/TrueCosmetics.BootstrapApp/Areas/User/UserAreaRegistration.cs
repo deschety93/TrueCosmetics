@@ -17,8 +17,9 @@ namespace TrueCosmetics.BootstrapApp.Areas.User
             context.MapRoute(
                 "User_default",
                 "User/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
-            );
+                new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+                namespaces: new[] { "TrueCosmetics.BootstrapApp.Areas.User.Controllers" }
+            ).DataTokens["area"] = "User";
         }
     }
 }

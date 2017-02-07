@@ -1,0 +1,41 @@
+﻿@model OrderDetailModel
+@{
+    Layout = null;
+}
+
+@using (Ajax.BeginForm("Add", "Cart", new AjaxOptions() {
+    HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "userCart",
+    OnSuccess = "closeModal"
+}))
+{
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                ×
+            </button>
+            <h4 class="modal-title" id="myModalLabel">
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(model => model.ProductId)
+                @Model.ProductName
+            </h4>
+        </div>
+        <div class="modal-body">
+            <div class="form-horizontal">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Quantity, "Количество: ", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">
+                Затвори
+            </button>
+            <button type="submit" class="btn btn-primary">
+                Запази
+            </button>
+        </div>
+    </div>
+}

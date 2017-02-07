@@ -7,6 +7,9 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using TrueCosmetics.BootstrapApp.Areas.User.Models;
+using TrueCosmetics.Data.Models;
+using System.Net;
+using System.Collections.Generic;
 
 namespace TrueCosmetics.BootstrapApp.Areas.User.Controllers
 {
@@ -320,6 +323,85 @@ namespace TrueCosmetics.BootstrapApp.Areas.User.Controllers
             }
             var result = await UserManager.AddLoginAsync(User.Identity.GetUserId(), loginInfo.Login);
             return result.Succeeded ? RedirectToAction("ManageLogins") : RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
+        }
+
+        public async Task<ActionResult> Addresses()
+        {
+            var appUser = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            if(Request.IsAjaxRequest())
+            {
+                var result = new List<SelectListItem>();
+                appUser.Addresses.ToList().ForEach(x => result.Add(new SelectListItem()
+                {
+                    Text = String.Format("{0}, {1}, {2}", x.Country, x.City, x.Address),
+                    Value = x.Id.ToString()
+                }));
+                return PartialView("_AddressesPartial", result);
+            }
+            return View(appUser.Addresses);
+        }
+        
+        public async Task<ActionResult> EditAddresses(int? Id)
+        {
+            if (!Id.HasValue)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var appUser = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            var addr = appUser.Addresses.FirstOrDefault(x => x.Id == Id);
+            if (addr == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(addr);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditAddresses([Bind(Include = "Id,Country,City,Address,Comment")]ApplicationUserAddress address)
+        {
+            if(ModelState.IsValid)
+            {
+                var appUser = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+                var addr = appUser.Addresses.FirstOrDefault(x => x.Id == address.Id);
+                if(addr != null)
+                {
+                    addr.Address = address.Address;
+                    addr.Country = addr.Country;
+                    addr.City = address.City;
+                    addr.Comment = address.Comment;
+                    await UserManager.UpdateAsync(appUser);
+                    return RedirectToAction("Adressess");
+                }
+            }
+
+            return View(address.Id);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ChooseAddress(int? Id)
+        {
+            if (!Id.HasValue)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var appUser = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            var addr = appUser.Addresses.FirstOrDefault(x => x.Id == Id);
+            if (addr == null)
+            {
+                return HttpNotFound();
+            }
+            if (HttpContext.Session["returnUrl"] != null)
+            {
+                HttpContext.Session["AddressId"] = Id;
+                string returlUrl = HttpContext.Session["returnUrl"].ToString();
+                HttpContext.Session.Remove("returnUrl");
+                return new RedirectResult(returlUrl);
+            }
+
+            return RedirectToAction("Adressess");
         }
 
         protected override void Dispose(bool disposing)

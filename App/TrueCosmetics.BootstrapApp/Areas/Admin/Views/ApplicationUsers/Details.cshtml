@@ -22,9 +22,22 @@
     <dd>
         @{ Html.RenderAction("Index", "ApplicationUserAddresses", new { userId = Model.Id });}
     </dd>
+
+    <dt>
+        @Html.Label("Поръчки")
+    </dt>
+
+    <dd id="orders">
+    </dd>
 </dl>
 
 <p>
     @Html.ActionLink("Редакция", "Edit", new { id = Model.Id }, new { @class = "btn btn-default" }) |
     @Html.ActionLink("Назад към таблицата", "Index",null, new { @class = "btn btn-default" })
 </p>
+
+<script>
+    $(function () {
+        $('#orders').load('@Url.Action("Index", "Orders", new { userId = Model.Id })')
+    })
+</script>
