@@ -155,6 +155,22 @@ namespace TrueCosmetics.BootstrapApp.Migrations
                 }
             }
             context.SaveChanges();
+            ApplicationUserManager manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context));
+            var user = manager.FindByEmailAsync("deschety@abv.bg").Result;
+            if (user == null)
+            {
+                user = new ApplicationUser()
+                {
+                    Email = "deschety@abv.bg",
+                    UserName = "deschety@abv.bg",
+                    PhoneNumber = "0888123456",
+                };
+                var r = manager.CreateAsync(user).Result;
+            }
+            if(!manager.IsInRoleAsync(user.Id, "Admin").Result)
+            {
+                var a = manager.AddToRoleAsync(user.Id, "Admin").Result;
+            }
         }
     }
 }

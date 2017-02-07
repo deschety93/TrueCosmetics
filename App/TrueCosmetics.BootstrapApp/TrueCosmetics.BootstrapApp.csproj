@@ -813,7 +813,22 @@
     <Content Include="Content\images\GenderCategories\240701_558124.jpg" />
     <Content Include="Content\images\GenderCategories\magic-378x178.jpg" />
     <Content Include="Content\images\loading.gif" />
+    <Content Include="Content\images\logo.jpg" />
+    <Content Include="Content\images\Manufacturers\chi-145x70.png" />
+    <Content Include="Content\images\Manufacturers\gigi.-145x70.png" />
     <Content Include="Content\images\Manufacturers\madona-snimka.jpg" />
+    <Content Include="Content\images\Products\10306372-1295530652-52000-228x228.jpg" />
+    <Content Include="Content\images\Products\2271964-228x228.jpg" />
+    <Content Include="Content\images\Products\31khSIsGKaL._SY355_-228x228.jpg" />
+    <Content Include="Content\images\Products\31khSIsGKaL._SY355_-500x500.jpg" />
+    <Content Include="Content\images\Products\6707305_0000-228x228.jpg" />
+    <Content Include="Content\images\Products\9785_default-228x228.jpg" />
+    <Content Include="Content\images\Products\biosilk-hydrating-therapy-maracuja-oil-1.gif-228x228.jpg" />
+    <Content Include="Content\images\Products\biosilk_hydrating_therapy_deep_masqu-228x228.jpg" />
+    <Content Include="Content\images\Products\biosilk_summer_therapy_silk_protect_167_ml-228x228.jpg" />
+    <Content Include="Content\images\Products\biosilk_volumizing_therapy_conditioner_500x500-500x500-228x228.jpg" />
+    <Content Include="Content\images\Products\madona-snimka.jpg" />
+    <Content Include="Content\images\Products\изтегленфайл.jpg" />
     <Content Include="Content\sb-admin-2.css" />
     <Content Include="Content\site.css" />
     <Content Include="Content\themes\base\accordion.css" />
@@ -1351,9 +1366,7 @@
       <Name>TrueCosmetics.Data.Models</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Content\images\Products\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Analyzer Include="..\..\packages\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />
     <Analyzer Include="..\..\packages\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
